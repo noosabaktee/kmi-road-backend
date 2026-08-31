@@ -83,20 +83,12 @@
         </div>
 
         <div id="map" class="w-full flex-1 h-full"></div>
-        <div id="map" class="w-full flex-1 h-full min-h-[400px] sm:min-h-[480px] lg:min-h-full"></div>
     </div>
 </div>
 @endsection
 
 @push('styles')
 <style>
-    #map {
-        width: 100%;
-        height: 100%;
-        min-height: 400px;
-        z-index: 10;
-    }
-
     .custom-car-marker {
         background: transparent;
         border: none;
@@ -122,7 +114,6 @@
         box-shadow: 0 8px 16px rgba(0, 133, 66, 0.4);
         font-size: 16px;
         transition: transform 0.3s ease;
-        z-index: 2;
     }
 
     .car-marker-pin:hover {
@@ -137,18 +128,6 @@
         background: rgba(132, 189, 0, 0.4);
         animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
         pointer-events: none;
-        z-index: 1;
-    }
-
-    @keyframes pulse-ring {
-        0% {
-            transform: scale(0.6);
-            opacity: 0.9;
-        }
-        80%, 100% {
-            transform: scale(1.6);
-            opacity: 0;
-        }
     }
 </style>
 @endpush
@@ -162,31 +141,22 @@
             $selectedTripId ?? 'null'
         }
     };
-    let polylines = {};
-    let selectedTripId = @json($selectedTripId ? (int)$selectedTripId : null);
 
     document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('DOMContentLoaded', function () {
         // Initialize Leaflet Map centered around Jakarta & Jabodetabek
         map = L.map('map', {
             zoomControl: false
         }).setView([-6.2088, 106.8456], 11);
-        map = L.map('map', { zoomControl: false }).setView([-6.2088, 106.8456], 11);
 
         L.control.zoom({
             position: 'bottomright'
         }).addTo(map);
-        L.control.zoom({ position: 'bottomright' }).addTo(map);
 
         // OpenStreetMap Layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-
-        setTimeout(() => {
-            if (map) map.invalidateSize();
-        }, 250);
 
         // Initial fetch
         fetchLiveTelemetry();
