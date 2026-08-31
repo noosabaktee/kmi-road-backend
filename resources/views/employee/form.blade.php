@@ -3,17 +3,17 @@
 @section('title', 'Form Pengajuan Kendaraan Dinas | Kalbe Nutritionals')
 
 @section('content')
-<div class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+<div class="py-6 sm:py-10 px-3 sm:px-6 lg:px-8 max-w-4xl mx-auto">
     <!-- Header Banner -->
-    <div class="rounded-3xl kalbe-gradient p-8 text-white shadow-xl shadow-kalbe-900/10 relative overflow-hidden mb-8">
+    <div class="rounded-2xl sm:rounded-3xl kalbe-gradient p-5 sm:p-8 text-white shadow-xl shadow-kalbe-900/10 relative overflow-hidden mb-6 sm:mb-8">
         <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-kalbe-400/10 rounded-full blur-2xl pointer-events-none"></div>
         <div class="relative z-10 max-w-2xl">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-kalbe-200 mb-4">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-semibold text-kalbe-200 mb-3 sm:mb-4">
                 <i class="fa-solid fa-building-circle-check"></i>
                 <span>PT Sanghiang Perkasa (Kalbe Nutritionals)</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Formulir Pengajuan <br><span class="text-kalbe-lime">Kendaraan Dinas Operasional</span></h1>
-            <p class="mt-3 text-slate-100 text-sm leading-relaxed">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">Formulir Pengajuan <br class="hidden sm:block"><span class="text-kalbe-lime">Kendaraan Dinas Operasional</span></h1>
+            <p class="mt-2.5 sm:mt-3 text-slate-100 text-xs sm:text-sm leading-relaxed">
                 Silakan lengkapi data perjalanan dinas di bawah ini. Sistem secara otomatis memvalidasi ketersediaan kapasitas kursi kendaraan secara real-time.
             </p>
         </div>
@@ -21,21 +21,21 @@
 
     <!-- Alert / Validation Errors -->
     @if ($errors->any())
-        <div class="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 text-sm flex items-start space-x-3 shadow-sm">
-            <i class="fa-solid fa-circle-exclamation text-red-600 text-lg mt-0.5"></i>
-            <div>
-                <p class="font-bold">Mohon periksa kembali formulir Anda:</p>
-                <ul class="mt-1 list-disc list-inside space-y-0.5">
-                    @foreach ($errors->all() as $err)
-                        <li>{{ $err }}</li>
-                    @endforeach
-                </ul>
-            </div>
+    <div class="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex items-start space-x-3 shadow-sm">
+        <i class="fa-solid fa-circle-exclamation text-red-600 text-lg mt-0.5 flex-shrink-0"></i>
+        <div>
+            <p class="font-bold">Mohon periksa kembali formulir Anda:</p>
+            <ul class="mt-1 list-disc list-inside space-y-0.5">
+                @foreach ($errors->all() as $err)
+                <li>{{ $err }}</li>
+                @endforeach
+            </ul>
         </div>
+    </div>
     @endif
 
     <!-- Booking Form Card -->
-    <form action="{{ route('employee.store') }}" method="POST" id="bookingForm" class="glass-card rounded-3xl p-8 sm:p-10 shadow-lg shadow-slate-200/50 space-y-8">
+    <form action="{{ route('employee.store') }}" method="POST" id="bookingForm" class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 shadow-lg shadow-slate-200/50 space-y-6 sm:space-y-8">
         @csrf
 
         <!-- Section 1: Data Karyawan -->
@@ -75,9 +75,9 @@
                             class="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-kalbe-500 focus:border-transparent transition-all shadow-sm appearance-none">
                             <option value="">-- Pilih Departemen --</option>
                             @foreach ($departments as $dept)
-                                <option value="{{ $dept->txtDepartmentName }}" {{ old('txtDepartment') == $dept->txtDepartmentName ? 'selected' : '' }}>
-                                    {{ $dept->txtDepartmentName }}
-                                </option>
+                            <option value="{{ $dept->txtDepartmentName }}" {{ old('txtDepartment') == $dept->txtDepartmentName ? 'selected' : '' }}>
+                                {{ $dept->txtDepartmentName }}
+                            </option>
                             @endforeach
                         </select>
                         <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 pointer-events-none"><i class="fa-solid fa-chevron-down text-xs"></i></span>
@@ -119,7 +119,7 @@
             <!-- Vehicle Selection Grid -->
             <div>
                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Pilih Mobil Operasional <span class="text-red-500">*</span></label>
-                
+
                 <div id="vehicleLoading" class="hidden py-8 text-center text-slate-500 text-sm">
                     <i class="fa-solid fa-circle-notch fa-spin text-kalbe-500 text-2xl mb-2"></i>
                     <p>Memperbarui ketersediaan kursi...</p>
@@ -127,42 +127,42 @@
 
                 <div id="vehicleList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach ($vehicles as $vehicle)
-                        @php
-                            $isFull = $vehicle->remaining_seats <= 0;
+                    @php
+                    $isFull = $vehicle->remaining_seats <= 0;
                         @endphp
                         <label class="vehicle-card relative flex flex-col p-5 rounded-2xl border-2 cursor-pointer transition-all {{ $isFull ? 'bg-slate-100/70 border-slate-200 opacity-60 cursor-not-allowed' : 'bg-white border-slate-200 hover:border-kalbe-400 hover:shadow-md' }}" data-id="{{ $vehicle->intVehicle_ID }}">
-                            <div class="flex items-start justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <input type="radio" name="intRequestedVehicle_ID" value="{{ $vehicle->intVehicle_ID }}" {{ $isFull ? 'disabled' : '' }} {{ old('intRequestedVehicle_ID') == $vehicle->intVehicle_ID ? 'checked' : '' }}
-                                        class="w-4 h-4 text-kalbe-600 focus:ring-kalbe-500 border-slate-300">
-                                    <div>
-                                        <h3 class="font-bold text-slate-900 text-sm">{{ $vehicle->txtVehicleName }}</h3>
-                                        <p class="text-xs font-semibold text-slate-500">{{ $vehicle->txtPlateNumber }} • {{ $vehicle->txtBrandModel }}</p>
-                                    </div>
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center space-x-3">
+                                <input type="radio" name="intRequestedVehicle_ID" value="{{ $vehicle->intVehicle_ID }}" {{ $isFull ? 'disabled' : '' }} {{ old('intRequestedVehicle_ID') == $vehicle->intVehicle_ID ? 'checked' : '' }}
+                                    class="w-4 h-4 text-kalbe-600 focus:ring-kalbe-500 border-slate-300">
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-sm">{{ $vehicle->txtVehicleName }}</h3>
+                                    <p class="text-xs font-semibold text-slate-500">{{ $vehicle->txtPlateNumber }} • {{ $vehicle->txtBrandModel }}</p>
                                 </div>
-                                <span class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-100 text-slate-700">{{ $vehicle->txtVehicleType }}</span>
                             </div>
+                            <span class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-100 text-slate-700">{{ $vehicle->txtVehicleType }}</span>
+                        </div>
 
-                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                                <div class="text-xs text-slate-500">
-                                    <i class="fa-solid fa-gas-pump text-slate-400 mr-1"></i> {{ $vehicle->txtFuelType }}
-                                </div>
-                                <div class="seat-badge">
-                                    @if ($isFull)
-                                        <span class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-extrabold bg-red-100 text-red-700">
-                                            <i class="fa-solid fa-ban text-[10px]"></i>
-                                            <span>Penuh (0 Kursi Tersisa)</span>
-                                        </span>
-                                    @else
-                                        <span class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-                                            <i class="fa-solid fa-chair text-[10px]"></i>
-                                            <span>Sisa {{ $vehicle->remaining_seats }} / {{ $vehicle->intMaxSeat }} Kursi</span>
-                                        </span>
-                                    @endif
-                                </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <div class="text-xs text-slate-500">
+                                <i class="fa-solid fa-gas-pump text-slate-400 mr-1"></i> {{ $vehicle->txtFuelType }}
                             </div>
+                            <div class="seat-badge">
+                                @if ($isFull)
+                                <span class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-extrabold bg-red-100 text-red-700">
+                                    <i class="fa-solid fa-ban text-[10px]"></i>
+                                    <span>Penuh (0 Kursi Tersisa)</span>
+                                </span>
+                                @else
+                                <span class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                                    <i class="fa-solid fa-chair text-[10px]"></i>
+                                    <span>Sisa {{ $vehicle->remaining_seats }} / {{ $vehicle->intMaxSeat }} Kursi</span>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
                         </label>
-                    @endforeach
+                        @endforeach
                 </div>
             </div>
         </div>
@@ -202,9 +202,9 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-xs text-slate-500 flex items-center space-x-2">
-                <i class="fa-solid fa-shield-heart text-kalbe-500 text-base"></i>
+        <div class="pt-5 sm:pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+            <div class="text-xs text-slate-500 flex items-center justify-center sm:justify-start space-x-2 text-center sm:text-left">
+                <i class="fa-solid fa-shield-heart text-kalbe-500 text-base flex-shrink-0"></i>
                 <span>Data tersimpan aman di database operasional KMI Road HC.</span>
             </div>
             <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl kalbe-gradient text-white font-bold text-sm shadow-lg shadow-kalbe-500/30 hover:opacity-95 transition-all flex items-center justify-center space-x-2">
@@ -218,13 +218,13 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById('dtmTripDate');
         const vehicleLoading = document.getElementById('vehicleLoading');
         const vehicleList = document.getElementById('vehicleList');
 
         // Dynamic fetch vehicle seats when date changes
-        dateInput.addEventListener('change', function () {
+        dateInput.addEventListener('change', function() {
             const selectedDate = this.value;
             if (!selectedDate) return;
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -41,6 +42,7 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen flex items-center justify-center bg-slate-100 p-4 font-sans text-slate-800 antialiased">
     <div class="max-w-md w-full">
         <!-- Logo & Title -->
@@ -54,12 +56,12 @@
         </div>
 
         <!-- Login Card -->
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200/60 border border-slate-200/80">
+        <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl shadow-slate-200/60 border border-slate-200/80">
             @if ($errors->any())
-                <div class="mb-6 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-center space-x-2">
-                    <i class="fa-solid fa-circle-exclamation text-red-600"></i>
-                    <span>{{ $errors->first() }}</span>
-                </div>
+            <div class="mb-6 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-center space-x-2">
+                <i class="fa-solid fa-circle-exclamation text-red-600"></i>
+                <span>{{ $errors->first() }}</span>
+            </div>
             @endif
 
             <form action="{{ route('admin.login.submit') }}" method="POST" class="space-y-5">
@@ -104,4 +106,5 @@
         </div>
     </div>
 </body>
+
 </html>

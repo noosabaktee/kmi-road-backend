@@ -3,10 +3,10 @@
 @section('title', 'Pengajuan Berhasil Terkirim | KMI Road')
 
 @section('content')
-<div class="py-12 px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto">
-    <div class="glass-card rounded-3xl p-8 sm:p-10 shadow-xl shadow-slate-200/50 border border-slate-200 text-center">
+<div class="py-8 sm:py-12 px-3 sm:px-6 lg:px-8 max-w-2xl mx-auto">
+    <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl shadow-slate-200/50 border border-slate-200 text-center">
         <!-- Success Icon -->
-        <div class="w-20 h-20 rounded-full bg-emerald-100 text-kalbe-500 mx-auto flex items-center justify-center text-3xl shadow-lg shadow-emerald-500/10 mb-6">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-100 text-kalbe-500 mx-auto flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-emerald-500/10 mb-4 sm:mb-6">
             <i class="fa-solid fa-check"></i>
         </div>
 
@@ -14,13 +14,13 @@
             Pengajuan Berhasil Disimpan
         </span>
 
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-4">Terima Kasih, {{ $booking->txtEmployeeName }}!</h1>
-        <p class="text-slate-500 text-sm mt-2">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 mt-3 sm:mt-4">Terima Kasih, {{ $booking->txtEmployeeName }}!</h1>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1.5 sm:mt-2">
             Data pengajuan dinas Anda telah berhasil masuk ke sistem antrean Tim Human Capital (HC).
         </p>
 
         <!-- Booking Ticket Card -->
-        <div class="mt-8 p-6 rounded-2xl bg-slate-50 border border-slate-200/80 text-left space-y-4">
+        <div class="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 text-left space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                 <div>
                     <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Nomor Registrasi Tiket</span>
@@ -30,21 +30,21 @@
                     <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Status Permohonan</span>
                     <div>
                         @if ($booking->txtBookingStatus === 'PENDING')
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
-                                <i class="fa-solid fa-clock text-[10px] mr-1"></i> Menunggu Jadwal Driver
-                            </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+                            <i class="fa-solid fa-clock text-[10px] mr-1"></i> Menunggu Jadwal Driver
+                        </span>
                         @elseif ($booking->txtBookingStatus === 'ASSIGNED')
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
-                                <i class="fa-solid fa-check text-[10px] mr-1"></i> Telah Dijadwalkan
-                            </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
+                            <i class="fa-solid fa-check text-[10px] mr-1"></i> Telah Dijadwalkan
+                        </span>
                         @elseif ($booking->txtBookingStatus === 'COMPLETED')
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-                                <i class="fa-solid fa-circle-check text-[10px] mr-1"></i> Perjalanan Selesai
-                            </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                            <i class="fa-solid fa-circle-check text-[10px] mr-1"></i> Perjalanan Selesai
+                        </span>
                         @else
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
-                                {{ $booking->txtBookingStatus }}
-                            </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+                            {{ $booking->txtBookingStatus }}
+                        </span>
                         @endif
                     </div>
                 </div>
@@ -76,24 +76,24 @@
             </div>
 
             @if ($booking->trip && $booking->trip->driver)
-                <div class="mt-4 pt-4 border-t border-slate-200 bg-white p-4 rounded-xl">
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-kalbe-600 block mb-1">Driver yang Ditugaskan</span>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 rounded-full kalbe-gradient flex items-center justify-center text-white font-bold text-xs">
-                                <i class="fa-solid fa-user-tie"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-slate-900">{{ $booking->trip->driver->txtDriverName }}</p>
-                                <p class="text-[11px] text-slate-500">{{ $booking->trip->driver->txtPhoneNumber }}</p>
-                            </div>
+            <div class="mt-4 pt-4 border-t border-slate-200 bg-white p-4 rounded-xl">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-kalbe-600 block mb-1">Driver yang Ditugaskan</span>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full kalbe-gradient flex items-center justify-center text-white font-bold text-xs">
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $booking->trip->driver->txtPhoneNumber) }}" target="_blank" class="px-3 py-1 text-xs font-bold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 flex items-center space-x-1">
-                            <i class="fa-brands fa-whatsapp text-sm"></i>
-                            <span>Hubungi</span>
-                        </a>
+                        <div>
+                            <p class="text-xs font-bold text-slate-900">{{ $booking->trip->driver->txtDriverName }}</p>
+                            <p class="text-[11px] text-slate-500">{{ $booking->trip->driver->txtPhoneNumber }}</p>
+                        </div>
                     </div>
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $booking->trip->driver->txtPhoneNumber) }}" target="_blank" class="px-3 py-1 text-xs font-bold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 flex items-center space-x-1">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Hubungi</span>
+                    </a>
                 </div>
+            </div>
             @endif
         </div>
 
