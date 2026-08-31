@@ -39,5 +39,6 @@ Route::prefix('driver')->group(function () {
 
         // Photo Documentation Checkpoint Upload (Pre-trip check, Fuel Refill with cost/liters, Arrived, Selesai)
         Route::post('/trips/{id}/documentation', [DriverDocumentationController::class, 'store']);
+        Route::delete('/trips/{id}/documentation/{docId}', [DriverDocumentationController::class, 'destroy']);
     });
 });
