@@ -72,9 +72,9 @@
     </div>
 
     <!-- Right Panel: Interactive Leaflet Map -->
-    <div class="w-full flex-1 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-sm overflow-hidden relative flex flex-col min-h-[380px] sm:min-h-[450px] lg:min-h-0 order-1 lg:order-2">
+    <div class="w-full flex-1 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-sm overflow-hidden relative flex flex-col min-h-[420px] sm:min-h-[500px] h-[550px] lg:h-full order-1 lg:order-2">
         <!-- Live Status Overlay Badge -->
-        <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-[400] bg-white/95 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-200 shadow-md flex items-center space-x-2.5 sm:space-x-3">
+        <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-[400] bg-white/95 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-200 shadow-md flex items-center space-x-2.5 sm:space-x-3 pointer-events-none">
             <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></span>
             <div>
                 <p class="text-[11px] sm:text-xs font-bold text-slate-900">GPS Live Telemetry</p>
@@ -82,13 +82,26 @@
             </div>
         </div>
 
-        <div id="map" class="w-full flex-1 h-full"></div>
+        <div id="map" class="w-full flex-1 h-full min-h-[420px] sm:min-h-[500px]"></div>
     </div>
 </div>
 @endsection
 
 @push('styles')
 <style>
+    #map {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+        z-index: 1;
+    }
+
+    .leaflet-container {
+        width: 100%;
+        height: 100%;
+        background-color: #f1f5f9 !important;
+    }
+
     .custom-car-marker {
         background: transparent;
         border: none;
@@ -114,6 +127,7 @@
         box-shadow: 0 8px 16px rgba(0, 133, 66, 0.4);
         font-size: 16px;
         transition: transform 0.3s ease;
+        z-index: 2;
     }
 
     .car-marker-pin:hover {
@@ -128,21 +142,39 @@
         background: rgba(132, 189, 0, 0.4);
         animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
         pointer-events: none;
+        z-index: 1;
+    }
+
+    @keyframes pulse-ring {
+        0% {
+            transform: scale(0.6);
+            opacity: 0.9;
+        }
+
+        80%,
+        100% {
+            transform: scale(1.6);
+            opacity: 0;
+        }
     }
 </style>
 @endpush
 
 @push('scripts')
 <script>
-    let map;
+    let map = null;
     let markers = {};
-    let selectedTripId = {
-        {
-            $selectedTripId ?? 'null'
-        }
-    };
+    let polylines = {};
+    let selectedTripId = @json($selectedTripId ? (int) $selectedTripId : null);
 
     document.addEventListener('DOMContentLoaded', function() {
+        initLeafletMap();
+    });
+
+    function initLeafletMap() {
+        const mapContainer = document.getElementById('map');
+        if (!mapContainer) return;
+
         // Initialize Leaflet Map centered around Jakarta & Jabodetabek
         map = L.map('map', {
             zoomControl: false
@@ -158,12 +190,17 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
+        // Invalidate size once DOM layout settles
+        setTimeout(() => {
+            if (map) map.invalidateSize();
+        }, 300);
+
         // Initial fetch
         fetchLiveTelemetry();
 
         // Auto poll telemetry every 5 seconds (Live Location like WhatsApp)
         setInterval(fetchLiveTelemetry, 5000);
-    });
+    }
 
     function fetchLiveTelemetry() {
         const refreshIcon = document.getElementById('refreshIcon');
