@@ -45,23 +45,13 @@
                 <h2 class="text-lg font-extrabold text-slate-900">Identitas Karyawan Pemohon</h2>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <!-- Nama Lengkap -->
                 <div>
                     <label for="txtEmployeeName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap Karyawan <span class="text-red-500">*</span></label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
                         <input type="text" name="txtEmployeeName" id="txtEmployeeName" value="{{ old('txtEmployeeName') }}" required placeholder="Contoh: Rian Hidayat"
-                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-kalbe-500 focus:border-transparent transition-all shadow-sm">
-                    </div>
-                </div>
-
-                <!-- NIK Karyawan -->
-                <div>
-                    <label for="txtEmployeeNIK" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">NIK / ID Karyawan (Opsional)</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-id-badge"></i></span>
-                        <input type="text" name="txtEmployeeNIK" id="txtEmployeeNIK" value="{{ old('txtEmployeeNIK') }}" placeholder="Contoh: KMI-2023-089"
                             class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-kalbe-500 focus:border-transparent transition-all shadow-sm">
                     </div>
                 </div>

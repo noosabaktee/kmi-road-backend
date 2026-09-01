@@ -214,17 +214,16 @@ class DatabaseSeeder extends Seeder
 
         // Passengers in active trip
         $passengers = [
-            ['txtEmployeeName' => 'Andi Pratama', 'txtEmployeeNIK' => 'KMI-2021-042', 'txtDepartment' => 'Quality Assurance & Control (QA/QC)', 'txtPhoneNumber' => '081299887766', 'txtPurpose' => 'Lead Auditor Verifikasi Bahan Baku'],
-            ['txtEmployeeName' => 'Dewi Sartika', 'txtEmployeeNIK' => 'KMI-2022-108', 'txtDepartment' => 'Quality Assurance & Control (QA/QC)', 'txtPhoneNumber' => '081388776655', 'txtPurpose' => 'Sampling Lab Mikrobiologi'],
-            ['txtEmployeeName' => 'Rian Hidayat', 'txtEmployeeNIK' => 'KMI-2023-019', 'txtDepartment' => 'Production & Manufacturing', 'txtPhoneNumber' => '081577665544', 'txtPurpose' => 'Sinkronisasi Line Packaging 4'],
-            ['txtEmployeeName' => 'Siti Nurhaliza', 'txtEmployeeNIK' => 'KMI-2024-055', 'txtDepartment' => 'Engineering & Maintenance', 'txtPhoneNumber' => '081766554433', 'txtPurpose' => 'Inspeksi Mesin Filling Aseptic'],
+            ['txtEmployeeName' => 'Andi Pratama', 'txtDepartment' => 'Quality Assurance & Control (QA/QC)', 'txtPhoneNumber' => '081299887766', 'txtPurpose' => 'Lead Auditor Verifikasi Bahan Baku'],
+            ['txtEmployeeName' => 'Dewi Sartika', 'txtDepartment' => 'Quality Assurance & Control (QA/QC)', 'txtPhoneNumber' => '081388776655', 'txtPurpose' => 'Sampling Lab Mikrobiologi'],
+            ['txtEmployeeName' => 'Rian Hidayat', 'txtDepartment' => 'Production & Manufacturing', 'txtPhoneNumber' => '081577665544', 'txtPurpose' => 'Sinkronisasi Line Packaging 4'],
+            ['txtEmployeeName' => 'Siti Nurhaliza', 'txtDepartment' => 'Engineering & Maintenance', 'txtPhoneNumber' => '081766554433', 'txtPurpose' => 'Inspeksi Mesin Filling Aseptic'],
         ];
 
         foreach ($passengers as $p) {
             trDutyTrip_Details::create([
                 'intDutyTrip_ID' => $activeTrip->intDutyTrip_ID,
                 'txtEmployeeName' => $p['txtEmployeeName'],
-                'txtEmployeeNIK' => $p['txtEmployeeNIK'],
                 'txtDepartment' => $p['txtDepartment'],
                 'txtPhoneNumber' => $p['txtPhoneNumber'],
                 'dtmTripDate' => now()->toDateString(),
@@ -334,7 +333,6 @@ class DatabaseSeeder extends Seeder
         trDutyTrip_Details::create([
             'intDutyTrip_ID' => $scheduledTrip->intDutyTrip_ID,
             'txtEmployeeName' => 'Bambang Irawan',
-            'txtEmployeeNIK' => 'KMI-2020-011',
             'txtDepartment' => 'Research & Development (R&D)',
             'txtPhoneNumber' => '081211223344',
             'dtmTripDate' => now()->addDay()->toDateString(),
@@ -349,7 +347,6 @@ class DatabaseSeeder extends Seeder
         trDutyTrip_Details::create([
             'intDutyTrip_ID' => $scheduledTrip->intDutyTrip_ID,
             'txtEmployeeName' => 'Fitri Anggraini',
-            'txtEmployeeNIK' => 'KMI-2023-089',
             'txtDepartment' => 'Human Capital (HC)',
             'txtPhoneNumber' => '081322334455',
             'dtmTripDate' => now()->addDay()->toDateString(),
@@ -365,7 +362,6 @@ class DatabaseSeeder extends Seeder
         trDutyTrip_Details::create([
             'intDutyTrip_ID' => null,
             'txtEmployeeName' => 'Gunawan Wibisono',
-            'txtEmployeeNIK' => 'KMI-2022-077',
             'txtDepartment' => 'Supply Chain & Logistics',
             'txtPhoneNumber' => '081987654321',
             'dtmTripDate' => now()->addDays(2)->toDateString(),

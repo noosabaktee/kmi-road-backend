@@ -92,7 +92,6 @@ class TripController extends Controller
             'passengers.*.name' => 'required|string|max:100',
             'passengers.*.dept' => 'required|string|max:100',
             'passengers.*.phone' => 'nullable|string|max:50',
-            'passengers.*.nik' => 'nullable|string|max:50',
         ]);
 
         $vehicle = mVehicle::findOrFail($validated['intVehicle_ID']);
@@ -127,7 +126,6 @@ class TripController extends Controller
                 trDutyTrip_Details::create([
                     'intDutyTrip_ID' => $trip->intDutyTrip_ID,
                     'txtEmployeeName' => $p['name'],
-                    'txtEmployeeNIK' => $p['nik'] ?? null,
                     'txtDepartment' => $p['dept'],
                     'txtPhoneNumber' => $p['phone'] ?? null,
                     'dtmTripDate' => $validated['dtmTripDate'],

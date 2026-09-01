@@ -63,7 +63,6 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'txtEmployeeName' => 'required|string|max:100',
-            'txtEmployeeNIK' => 'nullable|string|max:50',
             'txtDepartment' => 'required|string|max:100',
             'txtPhoneNumber' => 'required|string|max:50',
             'dtmTripDate' => 'required|date|after_or_equal:today',
@@ -84,7 +83,6 @@ class BookingController extends Controller
 
         $booking = trDutyTrip_Details::create([
             'txtEmployeeName' => $validated['txtEmployeeName'],
-            'txtEmployeeNIK' => $validated['txtEmployeeNIK'] ?? null,
             'txtDepartment' => $validated['txtDepartment'],
             'txtPhoneNumber' => $validated['txtPhoneNumber'],
             'dtmTripDate' => $validated['dtmTripDate'],

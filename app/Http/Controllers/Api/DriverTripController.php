@@ -220,7 +220,6 @@ class DriverTripController extends Controller
             'passengers' => $trip->passengers->map(fn($p) => [
                 'id' => $p->intDutyTrip_Detail_ID,
                 'name' => $p->txtEmployeeName,
-                'nik' => $p->txtEmployeeNIK,
                 'department' => $p->txtDepartment,
                 'phone' => $p->txtPhoneNumber,
                 'purpose' => $p->txtPurpose,

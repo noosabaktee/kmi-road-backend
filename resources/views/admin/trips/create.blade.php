@@ -103,7 +103,7 @@
 
                 <div id="passengerContainer" class="space-y-3">
                     <!-- Default Passenger Row 1 -->
-                    <div class="passenger-row p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-4 gap-3 relative">
+                    <div class="passenger-row p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-3 relative">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nama Karyawan <span class="text-red-500">*</span></label>
                             <input type="text" name="passengers[0][name]" required placeholder="Nama Lengkap" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
@@ -119,10 +119,6 @@
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">No. WhatsApp / HP</label>
                             <input type="tel" name="passengers[0][phone]" placeholder="0812..." class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">NIK (Opsional)</label>
-                            <input type="text" name="passengers[0][nik]" placeholder="KMI-..." class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
                         </div>
                     </div>
                 </div>
@@ -150,7 +146,7 @@
         let deptOptions = departments.map(d => `<option value="${d.txtDepartmentName}">${d.txtDepartmentName}</option>`).join('');
 
         const html = `
-            <div class="passenger-row p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-4 gap-3 relative animate-fade-in" id="row_${passengerIndex}">
+            <div class="passenger-row p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-3 relative animate-fade-in" id="row_${passengerIndex}">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nama Karyawan <span class="text-red-500">*</span></label>
                     <input type="text" name="passengers[${passengerIndex}][name]" required placeholder="Nama Lengkap" class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
@@ -161,14 +157,10 @@
                         ${deptOptions}
                     </select>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">No. WhatsApp / HP</label>
-                    <input type="tel" name="passengers[${passengerIndex}][phone]" placeholder="0812..." class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
-                </div>
                 <div class="flex items-end space-x-2">
                     <div class="flex-1">
-                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">NIK (Opsional)</label>
-                        <input type="text" name="passengers[${passengerIndex}][nik]" placeholder="KMI-..." class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">No. WhatsApp / HP</label>
+                        <input type="tel" name="passengers[${passengerIndex}][phone]" placeholder="0812..." class="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-xs focus:ring-2 focus:ring-kalbe-500">
                     </div>
                     <button type="button" onclick="removePassengerRow(${passengerIndex})" class="p-2.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg">
                         <i class="fa-solid fa-trash-can text-sm"></i>
